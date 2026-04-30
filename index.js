@@ -117,10 +117,19 @@ class DadsScanScene extends ThreeScene {
     }
 
     async loadModel() {
+        let status = document.querySelector(".model-load-status");
+        console.log("Here", status)
         let url = this.getAttribute("src");
         if (!url) return;
         let loader = new PLYLoader();
-        let geometry = await loader.loadAsync(url);
+        status && (status.textContent = "Loading model...");
+        let geometry = await loader.loadAsync(url, (event) => {
+            if (event.lengthComputable) {
+                let percent = Math.round((event.loaded / event.total) * 100);
+                status && (status.textContent = `Loading model... ${percent}%`);
+            }
+        })
+        status && (status.textContent = "Processing model...");
         geometry.computeVertexNormals();
 
         // center mesh 
@@ -140,6 +149,8 @@ class DadsScanScene extends ThreeScene {
 
         let mesh = new THREE.Mesh(geometry, material);
         this.root.add(mesh);
+
+        status && status.toggleAttribute("loaded", true);
     }
 }
 

@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>Stephen Ralph <a download="ModelFile.stl" stl href="./mesh-400K.stl"></a></h1>
+    <span class = "model-load-status">Loading...</span>
     <dads-scan-scene 
         environment = "./uluru-red.jpg" 
         src = "./mesh-400K.ply"
@@ -35,8 +36,23 @@
         font-family: Arial, Helvetica, sans-serif;
         z-index: 1;
         font-size: 3em;
+        display: flex;
+        white-space: nowrap;
     }
 
+     .model-load-status {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: Arial, Helvetica, sans-serif;
+        z-index: 1;
+        font-size: 1.5em;
+    }
+    .model-load-status[loaded] {
+        display: none;
+    }
+    
     a {
         color: black;
         text-decoration: none;
@@ -47,7 +63,7 @@
         background-image: url(./upload.svg);
         background-size: contain;
         background-repeat: no-repeat;
-        width: 1.5em;
+        width: 1.1em;
         height: 1.5em;
         content: " ";
         display: inline-block;
