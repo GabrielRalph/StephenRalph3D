@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Stephen Ralph <a download="ModelFile.stl" href="./mesh-400K.stl">+</a></h1>
+    <dads-scan-scene 
+        environment = "./uluru-red.jpg" 
+        src = "./mesh-400K.ply"
+        mat = "-30.4, -3.98, -34.5, 0.00, -34.8, 4.05, 30.2, 0.00, 0.429, 45.9, -5.66, 0.00, 0.00, 0.00, 0.00, 1.00"></dads-scan-scene>
+</body>
+
+<!-- Import map required when using Live Server (no bundler) -->
+<script type="importmap">
+{
+    "imports": {
+        "three": "./node_modules/three/build/three.module.js",
+        "three/addons/": "./node_modules/three/examples/jsm/"
+    }
+}
+</script>
+
+<script type="module" src="./index.js"></script>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+    }
+    dads-scan-scene {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    h1 {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: Arial, Helvetica, sans-serif;
+        z-index: 1;
+        font-size: 3em;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+        margin: 0 0.3em;
+        cursor: pointer;
+    }
+</style>
+</html>
