@@ -6,22 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Stephen Ralph <a download="ModelFile.stl" href="./mesh-400K.stl">+</a></h1>
+    <h1>Stephen Ralph <a download="ModelFile.stl" stl href="./mesh-400K.stl"></a></h1>
     <dads-scan-scene 
         environment = "./uluru-red.jpg" 
         src = "./mesh-400K.ply"
         mat = "-30.4, -3.98, -34.5, 0.00, -34.8, 4.05, 30.2, 0.00, 0.429, 45.9, -5.66, 0.00, 0.00, 0.00, 0.00, 1.00"></dads-scan-scene>
 </body>
-
-<!-- Import map required when using Live Server (no bundler) -->
-<script type="importmap">
-{
-    "imports": {
-        "three": "./node_modules/three/build/three.module.js",
-        "three/addons/": "./node_modules/three/examples/jsm/"
-    }
-}
-</script>
 
 <script type="module" src="./index.js"></script>
 <style>
@@ -52,6 +42,15 @@
         text-decoration: none;
         margin: 0 0.3em;
         cursor: pointer;
+    }
+    a[stl]::after {
+        background-image: url(./upload.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 1.5em;
+        height: 1.5em;
+        content: " ";
+        display: inline-block;
     }
 </style>
 </html>

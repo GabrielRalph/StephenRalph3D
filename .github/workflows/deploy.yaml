@@ -1,0 +1,60 @@
+name: Build and Deploy to GitHub Pages
+on:
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: "pages-deployment"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch main branch
+        run: git fetch --no-tags --depth=1 origin master
+
+      - name: Get the submodules
+        run: git submodule update --init --recursive --depth=1
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build public directory
+        run: npm run build
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with: 
+          path: dist
+
+  deploy:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
