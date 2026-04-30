@@ -126,7 +126,7 @@ class DadsScanScene extends ThreeScene {
         let geometry = await loader.loadAsync(url, (event) => {
             if (event.lengthComputable) {
                 let percent = Math.round((event.loaded / event.total) * 100);
-                status && (status.textContent = `Loading model... ${percent}%`);
+                status && (status.textContent = `Loading... ${percent}%`);
             }
         })
         status && (status.textContent = "Processing model...");
